@@ -1,7 +1,10 @@
 package com.auanjulio.hotelbookingapi.dao.usuario;
 
+import com.auanjulio.hotelbookingapi.dao.role.TabRoleObj;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tab_usuario")
@@ -28,4 +31,10 @@ public class TabUsuarioObj {
 
     @Column(name = "vl_saldo")
     private Double vlSaldo;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "tab_user_role",
+        joinColumns = @JoinColumn(name = "cd_usuario"),
+        inverseJoinColumns = @JoinColumn(name = "cd_role"))
+    private List<TabRoleObj> tabRoleObj;
 }
