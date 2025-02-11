@@ -47,8 +47,10 @@ public class TabUsuarioService {
 
         TabUsuarioObj tabUsuarioNovoObj = TabUsuarioObj.builder()
                 .txEmail(createUserDTO.txEmail())
-                .txSenha(createUserDTO.txSenha())
+                .txSenha(securityConfiguration.passwordEncoder().encode(createUserDTO.txSenha()))
                 .tabRoleObj(List.of(TabRoleObj.builder().roleName(createUserDTO.role()).build()))
+                .txNome(createUserDTO.txNome())
+                .vlSaldo(0.0)
                 .build();
 
         tabUsuarioRepository.save(tabUsuarioNovoObj);
