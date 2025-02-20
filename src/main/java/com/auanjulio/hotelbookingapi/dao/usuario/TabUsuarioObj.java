@@ -32,9 +32,9 @@ public class TabUsuarioObj {
     @Column(name = "vl_saldo")
     private Double vlSaldo;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(name = "tab_user_role",
-        joinColumns = @JoinColumn(name = "cd_usuario"),
-        inverseJoinColumns = @JoinColumn(name = "cd_role"))
+            joinColumns = @JoinColumn(name = "cd_usuario"),
+            inverseJoinColumns = @JoinColumn(name = "cd_role"))
     private List<TabRoleObj> tabRoleObj;
 }

@@ -23,7 +23,7 @@ public class UserDetailsImpl implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return tabUsuarioObj.getTabRoleObj()
                 .stream()
-                .map(role -> new SimpleGrantedAuthority(role.getRoleName().name()))
+                .map(role -> new SimpleGrantedAuthority(role.getTxNome()))
                 .collect(Collectors.toList());
     }
 
