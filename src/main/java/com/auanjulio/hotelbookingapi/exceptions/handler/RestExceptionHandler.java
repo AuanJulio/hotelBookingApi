@@ -1,5 +1,6 @@
 package com.auanjulio.hotelbookingapi.exceptions.handler;
 
+import com.auanjulio.hotelbookingapi.exceptions.EmailAlredyExistsException;
 import com.auanjulio.hotelbookingapi.exceptions.model.ApiErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +29,17 @@ public class RestExceptionHandler {
                 .errors(errors)
                 .build();
         return new ResponseEntity<>(apiErrorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(EmailAlredyExistsException.class)
+    public ResponseEntity<ApiErrorMessage> emailAlreadyExistsException(EmailAlredyExistsException ex) {
+        ApiErrorMessage apiErrorMessage = ApiErrorMessage
+                .builder()
+                .timestamp(LocalDateTime.now())
+                .cdError(HttpStatus.CONFLICT.value())
+                .txStatus(HttpStatus.CONFLICT.name())
+                .errors(List.of(ex.getMessage()))
+                .build();
+        return new ResponseEntity<>(apiErrorMessage, HttpStatus.CONFLICT);
     }
 }

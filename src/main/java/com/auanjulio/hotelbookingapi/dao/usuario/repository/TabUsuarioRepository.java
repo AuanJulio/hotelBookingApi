@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface TabUsuarioRepository extends JpaRepository<TabUsuarioObj, Integer> {
 
     Optional<TabUsuarioObj> findByTxEmail(String txEmail);
+
+    Boolean existsByTxEmail(String txEmail);
 }
